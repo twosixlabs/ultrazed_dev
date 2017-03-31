@@ -14,6 +14,3 @@
 	path = software/arm-trusted-firmware
 	url = https://github.com/Xilinx/arm-trusted-firmware.git
 	branch = master
-[submodule "software/u-boot-xlinx"]
-	path = software/u-boot-xlinx
-	url = https://github.com/Xilinx/u-boot-xlnx.git
