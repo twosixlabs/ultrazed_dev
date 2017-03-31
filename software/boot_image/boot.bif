@@ -1,0 +1,9 @@
+sdimage : 
+{
+ 	[fsbl_config]a53_x64
+ 	[bootloader]ultrazed_fsbl.elf
+	ultrazed_top.bit
+ 	[destination_cpu=pmu]ultrazed_pmu.elf
+ 	[destination_cpu=a53-0,exception_level=el-3,trustzone]bl31.elf
+ 	[destination_cpu=a53-0,exception_level=el-2]u-boot.elf       
+}

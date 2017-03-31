@@ -1,0 +1,19 @@
+[submodule "software/dtc"]
+	path = software/dtc
+	url = https://git.kernel.org/pub/scm/utils/dtc/dtc.git
+	branch = v1.4.4
+[submodule "software/linux-xlnx"]
+	path = software/linux-xlnx
+	url = https://github.com/Xilinx/linux-xlnx.git
+	branch = xilinx-v2016.4-sdsoc
+[submodule "software/u-boot-xlnx"]
+	path = software/u-boot-xlnx
+	url = https://github.com/Xilinx/u-boot-xlnx.git
+	branch = xilinx-v2016.4
+[submodule "software/arm-trusted-firmware"]
+	path = software/arm-trusted-firmware
+	url = https://github.com/Xilinx/arm-trusted-firmware.git
+	branch = master
+[submodule "software/u-boot-xlinx"]
+	path = software/u-boot-xlinx
+	url = https://github.com/Xilinx/u-boot-xlnx.git

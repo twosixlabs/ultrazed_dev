@@ -1,0 +1,9 @@
+fpga/*/*.cache/
+fpga/*/*.runs/
+fpga/*/*.ip_user_files/
+fpga/*/*.hw
+fpga/*/*.ioplanning
+software/fsbl/BOOT.bin
+software/fsbl/devicetree.dtb
+software/fsbl/u-boot.elf
+software/fsbl/uImage.bin

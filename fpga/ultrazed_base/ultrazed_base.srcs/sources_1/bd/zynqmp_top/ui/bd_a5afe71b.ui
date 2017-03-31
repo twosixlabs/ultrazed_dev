@@ -1,0 +1,27 @@
+{
+   guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
+#  -string -flagsOSRD
+preplace port led_8bits -pg 1 -y 260 -defaultsOSRD
+preplace inst axi_hpm0_addr -pg 1 -lvl 2 -y 130 -defaultsOSRD
+preplace inst zynqmp_ps -pg 1 -lvl 1 -y 90 -defaultsOSRD
+preplace inst axi_gpio_leds -pg 1 -lvl 3 -y 260 -defaultsOSRD
+preplace inst axi_bram_ctrl -pg 1 -lvl 3 -y 140 -defaultsOSRD
+preplace inst axi_bram -pg 1 -lvl 4 -y 140 -defaultsOSRD
+preplace inst ps_sys_rst -pg 1 -lvl 1 -y 280 -defaultsOSRD
+preplace netloc axi_mem_intercon_M01_AXI 1 2 1 920
+preplace netloc zynq_ultra_ps_e_0_pl_clk0 1 0 3 20 190 630 270 930
+preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 3 1 N
+preplace netloc zynq_ultra_ps_e_0_M_AXI_HPM0_LPD 1 1 1 N
+preplace netloc axi_mem_intercon_M00_AXI 1 2 1 N
+preplace netloc rst_ps8_0_100M_peripheral_aresetn 1 1 2 640 320 940
+preplace netloc rst_ps8_0_100M_interconnect_aresetn 1 1 1 620
+preplace netloc axi_gpio_0_GPIO 1 3 2 NJ 260 NJ
+preplace netloc zynq_ultra_ps_e_0_pl_resetn0 1 0 2 30 180 610
+levelinfo -pg 1 0 320 780 1070 1310 1440 -top 0 -bot 370
+",
+}
+{
+   da_axi4_cnt: "2",
+   da_bram_cntlr_cnt: "3",
+   da_zynq_ultra_ps_e_cnt: "1",
+}

@@ -1,0 +1,4 @@
+fpgaimage : 
+{
+ 	ultrazed_top.bit       
+}
