@@ -6,6 +6,7 @@ import time
 
 BRAM_BASE = '0x0'
 LED_BASE  = '0x10000'
+TEST_REG  = '0x2003C'
 
 # Generic peek/poke
 def peek(addr,echo):
@@ -30,7 +31,7 @@ def led_count():
 	while loop_cnt < 256:
 		led_wr(loop_cnt)
 		loop_cnt = loop_cnt + 1
-		time.sleep(0.5)
+		time.sleep(0.050)
 
 # Write to the base address in BRAM
 def bram_wr(arg_str):
@@ -40,3 +41,12 @@ def bram_wr(arg_str):
 # Read from the base address in BRAM
 def bram_rd():
 	peek(BRAM_BASE,1)	
+
+# Write to test debug register 
+def reg_wr(arg_str):
+	msk_str = '0xFFFFFFFF'
+	poke(TEST_REG,arg_str,msk_str)
+
+# Read from test debug register
+def reg_rd():
+	peek(TEST_REG,1)

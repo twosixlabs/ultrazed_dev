@@ -6,13 +6,6 @@ function cp_rootfs()
 	sudo unsquashfs -f -d ${ROOTFS_INSTALL_DIR} ../software/ubuntu-server-16042-arm64.squashfs
 }
 
-# Update kernel modules
-function cp_modules()
-{
-	sudo rm -fr ${ROOTFS_INSTALL_DIR}/lib/modules/
-	sudo cp -rv ${INSTALL_MOD_PATH}/lib ${ROOTFS_INSTALL_DIR}/.
-}
-
 # Copy peek/poke and test python library
 function cp_apps()
 {
@@ -53,6 +46,19 @@ function wr_fstab()
 /dev/mmcblk0p1  /boot auto defaults  0  2' > ${ROOTFS_INSTALL_DIR}/etc/fstab"
 }
 
+# Add sources to APT repo list
+function wr_repolist()
+{
+	sudo sh -c "echo '
+deb http://ports.ubuntu.com/ubuntu-ports/ xenial main
+deb http://ports.ubuntu.com/ubuntu-ports/ xenial universe
+deb http://ports.ubuntu.com/ubuntu-ports/ xenial multiverse
+deb http://ports.ubuntu.com/ubuntu-ports/ xenial-security main
+deb http://ports.ubuntu.com/ubuntu-ports/ xenial-updates main
+deb http://ports.ubuntu.com/ubuntu-ports/ xenial-updates universe
+deb http://ports.ubuntu.com/ubuntu-ports/ xenial-updates multiverse' > $ROOTFS_INSTALL_DIR/etc/apt/sources.list"
+}
+
 # Define variables
 BOARD_HOSTNAME=ultrazed
 BOARD_IP_ADDR=172.20.2.30
@@ -63,11 +69,12 @@ INSTALL_MOD_PATH=/tmp/xilinx_socfpga_kernel/deploy/modules
 sudo rm -fr ${ROOTFS_INSTALL_DIR}
 mkdir ${ROOTFS_INSTALL_DIR}
 cp_rootfs
-cp_modules
+# cp_modules
 cp_apps
 wr_ethinterface
 wr_hostname
 wr_fstab
+wr_repolist
 sync
 
 echo "-----------------------------"

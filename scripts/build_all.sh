@@ -32,24 +32,18 @@ function clean_all()
 	# FSBL
 	cd ../fsbl
 	clean_fsbl
-	# ATF
-	cd ../arm-trusted-firmware
-	make clean
 	# DTC
 	cd ../dtc
 	make clean
-	# uBoot
-	cd ../u-boot-xlnx
-	cleanuboot
-	# Kernel
-	cd ../linux-xlnx
-	cleankernel
 	# Device tree
 	cd ../device_tree
 	rm -fr system.dt*
 	# Peek/Poke
 	cd ../axi_hpm0_rw
 	make clean
+	# Kernel, uBoot, ARM Trusted Firmware
+	cd ../petalinux_build
+	clean_petalinux	
 	# Boot image
 	cd ../boot_image
 	clean_bootimg
@@ -72,33 +66,18 @@ function build_all()
 	# FSBL
 	cd ../fsbl
 	build_fsbl
-	# ATF
-	cd ../arm-trusted-firmware
-	make PLAT=zynqmp RESET_TO_BL31=1
 	# DTC
 	cd ../dtc
 	make
-	# uBoot
-	cd ../u-boot-xlnx
-	cd arch/arm/dts
-	if [ ! -e zynqmp-zcu102.dts.orig ]
-	then 
-		patch -f zynqmp-zcu102.dts ../../../../patches/zynqmp-zcu102.patch
-	fi
-	cd ../../../
-	configuboot
-	makeuboot
-	# Kernel
-	cd ../linux-xlnx
-	configkernel
-	makekernel
-	makemodules
 	# Device tree
 	cd ../device_tree
-	./build_dtb.sh zynqmp-zcu102-revB_xilinx-v2016.4-sdsoc.dts
+	./build_dtb.sh petalinux_20171.dts
 	# Peek/Poke
 	cd ../axi_hpm0_rw
 	make
+	# Kernel, uBoot, ARM Trusted Firmware 
+	cd ../petalinux_build
+	build_petalinux	
 	# Boot image
 	cd ../boot_image
 	build_bootimg

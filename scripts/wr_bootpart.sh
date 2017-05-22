@@ -9,14 +9,19 @@ function cp_boot_image()
 # Copy kernel image
 function cp_kernel()
 {
-	cp -v $BUILD_KERNEL_DIR/arch/arm64/boot/Image ${BOOT_INSTALL_DIR}/.
+	cp -v ../software/petalinux_build/images/linux/Image ${BOOT_INSTALL_DIR}/.
 }
 
 # Copy device tree binaries
 function cp_dtb()
 {
 	cp -v ../software/device_tree/system.dtb ${BOOT_INSTALL_DIR}/.
-	# cp -v $INSTALL_DTBS_PATH/xilinx/zynqmp-zcu102.dtb system.dtb
+}
+
+# Copy uEnv.txt
+function cp_uenv()
+{
+	cp -v ../software/uEnv.txt ${BOOT_INSTALL_DIR}/.
 }
 
 # Define variables
@@ -30,6 +35,7 @@ mkdir ${BOOT_INSTALL_DIR}
 cp_boot_image
 cp_kernel
 cp_dtb
+cp_uenv
 
 echo "-----------------------------"
 echo "Boot Script Complete"
