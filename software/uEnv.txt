@@ -1,0 +1,9 @@
+sd_dev=0
+sd_part=1
+dtb_addr=0x11800000
+dtb_img=system.dtb
+kernel_addr=0x10000000
+kernel_img=Image
+cp_dtb2ram=mmcinfo && fatload mmc $sd_dev:$sd_part ${dtb_addr} ${dtb_img}
+cp_kernel2ram=mmcinfo && fatload mmc $sd_dev:$sd_part ${kernel_addr} ${kernel_img}
+uenv_boot=run cp_dtb2ram && run cp_kernel2ram && booti ${kernel_addr} - ${dtb_addr}
