@@ -24,10 +24,16 @@ function cp_uenv()
 	cp -v ../software/uEnv.txt ${BOOT_INSTALL_DIR}/.
 }
 
+# Copy FPGA image
+function cp_fpgaimg()
+{
+	cp -v ../fpga/$FPGA_PROJ/$FPGA_PROJ.runs/impl_1/$FPGA_IMG.bit ${BOOT_INSTALL_DIR}/.
+}
+
 # Define variables
 BOOT_INSTALL_DIR=./boot_part
-BUILD_KERNEL_DIR=/tmp/xilinx_socfpga_kernel
-INSTALL_DTBS_PATH=${BUILD_KERNEL_DIR}/deploy/dtbs
+FPGA_PROJ=ultrazed_base
+FPGA_IMG=ultrazed_top
 
 # Install boot partitions
 rm -fr ${BOOT_INSTALL_DIR}
@@ -36,6 +42,7 @@ cp_boot_image
 cp_kernel
 cp_dtb
 cp_uenv
+cp_fpgaimg
 
 echo "-----------------------------"
 echo "Boot Script Complete"

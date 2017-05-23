@@ -1,9 +1,14 @@
 sd_dev=0
 sd_part=1
+fpga_dev=0
+fpga_addr=0x15800000
+fpga_img=ultrazed_top.bit
 dtb_addr=0x11800000
 dtb_img=system.dtb
 kernel_addr=0x10000000
 kernel_img=Image
-cp_dtb2ram=mmcinfo && fatload mmc $sd_dev:$sd_part ${dtb_addr} ${dtb_img}
-cp_kernel2ram=mmcinfo && fatload mmc $sd_dev:$sd_part ${kernel_addr} ${kernel_img}
-uenv_boot=run cp_dtb2ram && run cp_kernel2ram && booti ${kernel_addr} - ${dtb_addr}
+cp_fpga2ram=fatload mmc $sd_dev:$sd_part ${fpga_addr} ${fpga_img}
+load_fpga=fpga loadb ${fpga_dev} ${fpga_addr} $filesize
+cp_dtb2ram=fatload mmc $sd_dev:$sd_part ${dtb_addr} ${dtb_img}
+cp_kernel2ram=fatload mmc $sd_dev:$sd_part ${kernel_addr} ${kernel_img}
+uenv_boot=run cp_fpga2ram && run load_fpga && run cp_dtb2ram && run cp_kernel2ram && booti ${kernel_addr} - ${dtb_addr}
