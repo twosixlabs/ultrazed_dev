@@ -2,31 +2,34 @@
 
 interface axi4_lite 
    #(
-      A_WIDTH     = 32, // Width of the address bus
-      D_WIDTH     = 32  // Width of the data bus
+      A_WIDTH     = 32, // R/W address channel width
+      D_WIDTH     = 32, // R/W data channel width
+      R_WIDTH     = 2,  // Response channel width
+      W_WIDTH     = 4,  // Write strobe with
+      P_WIDTH     = 3   // ARM Trust Zone protected address width  
    );
 
    /* Constants */ 
 
    /* REG/WIRE declarations */
    logic [A_WIDTH-1:0]  araddr; 
-   logic [2:0]          arprot; 
+   logic [P_WIDTH-1:0]  arprot; 
    logic                arready;
    logic                arvalid;
    logic [A_WIDTH-1:0]  awaddr; 
-   logic [2:0]          awprot; 
+   logic [P_WIDTH-1:0]  awprot; 
    logic                awready;
    logic                awvalid;
    logic                bready; 
-   logic [1:0]          bresp;  
+   logic [R_WIDTH-1:0]  bresp;  
    logic                bvalid; 
    logic [D_WIDTH-1:0]  rdata;  
    logic                rready; 
-   logic [1:0]          rresp;  
+   logic [R_WIDTH-1:0]  rresp;  
    logic                rvalid; 
    logic [D_WIDTH-1:0]  wdata;  
    logic                wready; 
-   logic [3:0]          wstrb;  
+   logic [W_WIDTH-1:0]  wstrb;  
    logic                wvalid;  
    
    /* Master interface */
