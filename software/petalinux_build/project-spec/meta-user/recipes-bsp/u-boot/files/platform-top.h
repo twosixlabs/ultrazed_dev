@@ -1,5 +1,8 @@
 #include <configs/platform-auto.h>
 
+/* Override default preboot settings */
+#define CONFIG_PREBOOT	"echo; echo U-BOOT for UltraZed ZynqMP; echo"
+
 /* Extra U-Boot Env settings */
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	SERIAL_MULTI \ 
