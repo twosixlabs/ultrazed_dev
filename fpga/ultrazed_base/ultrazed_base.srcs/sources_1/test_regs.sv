@@ -5,6 +5,8 @@
       Register            Offset    Default
       ----------------    ------    ----------
       version             0x0000    0x00000000
+      control             0x0001    0x000AA550
+      status              0x0002    0x00000000
       debug               0x000F    0x12345678
 
 */
@@ -20,10 +22,25 @@ module test_regs #(
    axi4_lite.Slave               b_reg_axi,              // Bxx - Register/control interface       
    input  logic [15:0]           i_version_major,        // I16 - Version Major
    input  logic [15:0]           i_version_minor,        // I16 - Version Minor
+   output logic                  o_en,                   // O1  - Enable
+   output logic                  o_en_pls,               // O1  - 
+   output logic [ 7:0]           o_reg1,                 // O1  - Control register 1
+   output logic [ 7:0]           o_reg2,                 // O1  - Control register 2
+   input  logic [ 7:0]           i_status,               // I8  - Status register
    output logic [D_WIDTH-1:0]    o_debug_test_reg        // Oxx - Debug/test register
 );      
 
 /* Constants */
+// Control Register bitmap
+localparam CTRL_REG1_H     = 11;
+localparam CTRL_REG1_L     = 4;
+localparam CTRL_REG1_WORD  = 8'h55;
+localparam CTRL_REG2_H     = 19;
+localparam CTRL_REG2_L     = 12;
+localparam CTRL_REG2_WORD  = 8'hAA;
+localparam EN              = 0;
+// Control Register = REG1, REG2, EN
+localparam CTRL_REG_WORD   = {12'd0, CTRL_REG2_WORD, CTRL_REG1_WORD, 4'd0};
 
 /* REG/WIRE declarations */ 
 typedef enum reg [1:0] {IDLE           = 2'h0,
@@ -43,6 +60,8 @@ typedef struct {
    logic axi_rvalid;
    logic axi_bvalid;
    // Registers       
+   logic ctrl_reg_pls; 
+   logic [D_WIDTH-1:0] ctrl_reg;              
    logic [D_WIDTH-1:0] debug_reg;            
 } fsm_struct;
 
@@ -59,12 +78,17 @@ assign b_reg_axi.bvalid       = Q.axi_bvalid;
 assign b_reg_axi.bresp        = 'd0;
 assign b_reg_axi.rresp        = 'd0;
 // Registers
+assign o_en                   = Q.ctrl_reg[EN];
+assign o_en_pls               = Q.ctrl_reg_pls;
+assign o_reg1                 = Q.ctrl_reg[CTRL_REG1_H:CTRL_REG1_L];
+assign o_reg2                 = Q.ctrl_reg[CTRL_REG2_H:CTRL_REG2_L];
 assign o_debug_test_reg       = Q.debug_reg;
 
 /* AXI R/W FSM */
 always @ ( posedge i_clk or negedge i_rst_n ) begin
    if ( !i_rst_n ) begin
       Q  <= '{ state     : IDLE,
+               ctrl_reg  : CTRL_REG_WORD,
                debug_reg : 32'h12345678, 
                default   :'d0 };
    end else begin
@@ -75,6 +99,7 @@ end
 always @ ( * ) begin
    // Defaults
    D = Q;
+   D.ctrl_reg_pls = 1'b0;
    // Write
    D.axi_awready = 1'b0;
    D.axi_wready = 1'b0;
@@ -127,6 +152,11 @@ always @ ( * ) begin
             D.state = IDLE;
             // Write address decoding
             case ( Q.axi_awaddr[A_MSB-1:A_LSB] )
+               'd1:
+               begin
+                  D.ctrl_reg     = b_reg_axi.wdata;
+                  D.ctrl_reg_pls = b_reg_axi.wdata[EN] ? 1'b1 : 1'b0;
+               end               
                'd15:
                begin
                   D.debug_reg = b_reg_axi.wdata;
@@ -152,6 +182,14 @@ always @ ( * ) begin
                begin
                   D.axi_rdata = {i_version_major[15:0], i_version_minor[15:0]};
                end
+               'd1:
+               begin
+                  D.axi_rdata = Q.ctrl_reg;
+               end      
+               'd2:
+               begin
+                  D.axi_rdata = {24'd0, i_status};
+               end                        
                'd15:
                begin
                   D.axi_rdata = Q.debug_reg;

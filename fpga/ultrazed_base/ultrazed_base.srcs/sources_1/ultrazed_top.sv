@@ -40,36 +40,14 @@ always @ ( posedge axi_ref_clk or negedge axi_rst_n ) begin
    end
 end
 
-/* ZynqMP Top Level - PS Interfaces + AXI Address Decode */                                                
-zynqmp_top_wrapper zynq_ps_axi_decode(   
-   // PL Reference Clock
-   .pl_ref_clk_n           ( i_pl_ref_clk_n        ), // I1  -
-   .pl_ref_clk_p           ( i_pl_ref_clk_p        ), // I1  -
-   // AXI Reference Clock/Reset
-   .axi_ref_clk            ( axi_ref_clk           ), // O1  - 
-   .axi_rst_n              ( axi_rst_n             ), // O1  -   
-   // Test Register AXI-Lite Interface
-   .test_reg_axi_araddr    ( test_reg_axi.araddr   ),
-   .test_reg_axi_arprot    ( test_reg_axi.arprot   ),
-   .test_reg_axi_arready   ( test_reg_axi.arready  ),
-   .test_reg_axi_arvalid   ( test_reg_axi.arvalid  ),
-   .test_reg_axi_awaddr    ( test_reg_axi.awaddr   ),
-   .test_reg_axi_awprot    ( test_reg_axi.awprot   ),
-   .test_reg_axi_awready   ( test_reg_axi.awready  ),
-   .test_reg_axi_awvalid   ( test_reg_axi.awvalid  ),
-   .test_reg_axi_bready    ( test_reg_axi.bready   ),
-   .test_reg_axi_bresp     ( test_reg_axi.bresp    ),
-   .test_reg_axi_bvalid    ( test_reg_axi.bvalid   ),
-   .test_reg_axi_rdata     ( test_reg_axi.rdata    ),
-   .test_reg_axi_rready    ( test_reg_axi.rready   ),
-   .test_reg_axi_rresp     ( test_reg_axi.rresp    ),
-   .test_reg_axi_rvalid    ( test_reg_axi.rvalid   ),
-   .test_reg_axi_wdata     ( test_reg_axi.wdata    ),
-   .test_reg_axi_wready    ( test_reg_axi.wready   ),
-   .test_reg_axi_wstrb     ( test_reg_axi.wstrb    ),
-   .test_reg_axi_wvalid    ( test_reg_axi.wvalid   ),   
-   // LEDs
-   .led_8bits_tri_o        ( o_ps_leds[7:1]        )  // O8  -
+/* ZynqMP PS Wrapper */                                                
+ps_wrapper ps_axi_decode (   
+   .i_pl_ref_clk_n   ( i_pl_ref_clk_n        ), // I1  - PL Reference Clock
+   .i_pl_ref_clk_p   ( i_pl_ref_clk_p        ), // I1  -
+   .o_axi_ref_clk    ( axi_ref_clk           ), // O1  - AXI Reference Clock/Reset
+   .o_axi_rst_n      ( axi_rst_n             ), // O1  -   
+   .o_ps_leds        ( o_ps_leds[7:1]        ), // O8  - LEDs
+   .b_test_reg_axi   ( test_reg_axi.Master   )  // Bxx - Test Register/control interface 
 );
 
 /* Test Register Interface */
@@ -80,8 +58,13 @@ test_registers (
    .i_clk               ( axi_ref_clk           ), // I1  - System Clock
    .i_rst_n             ( axi_rst_n             ), // I1  - Active-low system clock synchronized reset
    .b_reg_axi           ( test_reg_axi.Slave    ), // Bxx - Register/control interface
-   .i_version_major     ( 16'hAAAA              ), // I16 - Version Major
-   .i_version_minor     ( 16'h5555              ), // I16 - Version Minor  
+   .i_version_major     ( 16'h8765              ), // I16 - Version Major
+   .i_version_minor     ( 16'h4321              ), // I16 - Version Minor  
+   .o_en                (                       ), // O1  - Enable
+   .o_en_pls            (                       ), // O1  - 
+   .o_reg1              (                       ), // O1  - Control register 1
+   .o_reg2              (                       ), // O1  - Control register 2
+   .i_status            ( 8'hA5                 ), // I8  - Status register
    .o_debug_test_reg    (                       )  // Oxx - Debug/test register
 ); 
 
