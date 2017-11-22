@@ -26,24 +26,15 @@ function clean_all()
 	cd fpga/ultrazed_base
 	clean_fpga
 	cd ../..
-	# PMU
-	cd software/pmu
-	clean_pmu
-	# FSBL
-	cd ../fsbl
-	clean_fsbl
-	# DTC
-	cd ../dtc
-	make clean
-	# Device tree
-	cd ../device_tree
-	rm -fr system.dt*
+	# FPGA image
+	cd software/fpga_image
+	clean_fpgaimg
 	# Peek/Poke
 	cd ../axi_hpm0_rw
 	make clean
-	# Kernel, uBoot, ARM Trusted Firmware
+	# Kernel, uBoot, ARM Trusted Firmware, Device tree, FSBL, PMU
 	cd ../petalinux_build
-	clean_petalinux	
+	clean_petalinux
 	# Boot image
 	cd ../boot_image
 	clean_bootimg
@@ -60,24 +51,15 @@ function build_all()
 	cd fpga/ultrazed_base
 	build_fpga
 	cd ../..
-	# PMU
-	cd software/pmu
-	build_pmu
-	# FSBL
-	cd ../fsbl
-	build_fsbl
-	# DTC
-	cd ../dtc
-	make
-	# Device tree
-	cd ../device_tree
-	./build_dtb.sh petalinux_20171.dts
+	# FPGA image
+	cd software/fpga_image
+	build_fpgaimg
 	# Peek/Poke
 	cd ../axi_hpm0_rw
 	make
-	# Kernel, uBoot, ARM Trusted Firmware 
+	# Kernel, uBoot, ARM Trusted Firmware, Device tree, FSBL, PMU
 	cd ../petalinux_build
-	build_petalinux	
+	build_petalinux
 	# Boot image
 	cd ../boot_image
 	build_bootimg

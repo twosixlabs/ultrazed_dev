@@ -44,7 +44,7 @@
 </DIV>
 </A>
 </DIV>
-<DIV class="content_container">This design is targeted for xczu3eg board (part number: ES1-1)
+<DIV class="content_container">This design is targeted for xczu3eg board (part number: PROD-1)
 
 <br>
 <H2><a name="summTAB">Zynq UltraScale+ Design Summary</a></H2>
@@ -70,7 +70,7 @@ xczu3eg
 <B>Part</B>
 </TD>
 <TD width=80% BGCOLOR=#E6E6E6>
-ES1-1
+PROD-1
 </TD>
 </TR>
 <TR valign="top">
@@ -123,10 +123,10 @@ Xilinx
 MIO 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[0]
+sclk_out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -138,7 +138,7 @@ slow
 pullup
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-inout
+out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 12
@@ -149,10 +149,10 @@ inout
 MIO 1
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[1]
+miso_mo1
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -175,10 +175,10 @@ inout
 MIO 2
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[2]
+mo2
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -201,10 +201,10 @@ inout
 MIO 3
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[3]
+mo3
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -227,10 +227,10 @@ inout
 MIO 4
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[4]
+mosi_mi0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -253,10 +253,10 @@ inout
 MIO 5
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[5]
+n_ss_out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -268,7 +268,7 @@ slow
 pullup
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-inout
+out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 12
@@ -305,10 +305,10 @@ inout
 MIO 7
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[7]
+n_ss_out_upper
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -320,7 +320,7 @@ slow
 pullup
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-inout
+out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 12
@@ -331,10 +331,10 @@ inout
 MIO 8
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[8]
+mo_upper[0]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -357,10 +357,10 @@ inout
 MIO 9
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[9]
+mo_upper[1]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -383,10 +383,10 @@ inout
 MIO 10
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[10]
+mo_upper[2]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -409,10 +409,10 @@ inout
 MIO 11
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[11]
+mo_upper[3]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -435,10 +435,10 @@ inout
 MIO 12
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+Quad SPI Flash
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[12]
+sclk_out_upper
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -450,7 +450,7 @@ slow
 pullup
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-inout
+out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 12
@@ -461,10 +461,10 @@ inout
 MIO 13
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[13]
+sdio0_data_out[0]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -487,10 +487,10 @@ inout
 MIO 14
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[14]
+sdio0_data_out[1]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -513,10 +513,10 @@ inout
 MIO 15
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[15]
+sdio0_data_out[2]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -539,10 +539,10 @@ inout
 MIO 16
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[16]
+sdio0_data_out[3]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -565,10 +565,10 @@ inout
 MIO 17
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[17]
+sdio0_data_out[4]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -591,10 +591,10 @@ inout
 MIO 18
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[18]
+sdio0_data_out[5]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -617,10 +617,10 @@ inout
 MIO 19
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[19]
+sdio0_data_out[6]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -643,10 +643,10 @@ inout
 MIO 20
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[20]
+sdio0_data_out[7]
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -669,10 +669,10 @@ inout
 MIO 21
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[21]
+sdio0_cmd_out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -695,10 +695,10 @@ inout
 MIO 22
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+SD 0
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[22]
+sdio0_clk_out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -710,7 +710,7 @@ slow
 pullup
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-inout
+out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 12
@@ -747,10 +747,10 @@ inout
 MIO 24
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+I2C 1
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[24]
+scl_out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -773,10 +773,10 @@ inout
 MIO 25
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO0 MIO
+I2C 1
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio0[25]
+sda_out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -955,10 +955,10 @@ inout
 MIO 32
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO1 MIO
+UART 1
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio1[32]
+txd
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -970,7 +970,7 @@ slow
 pullup
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-inout
+out
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 12
@@ -981,10 +981,10 @@ inout
 MIO 33
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-GPIO1 MIO
+UART 1
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-gpio1[33]
+rxd
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 schmitt
@@ -996,7 +996,7 @@ slow
 pullup
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
-inout
+in
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 12
@@ -2264,6 +2264,34 @@ IOPLL
 </TR>
 <TR valign="top">
 <TD width=10% BGCOLOR=#FBF5EF>
+QSPI freq (MHz)
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+125
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+IOPLL
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+124.999
+</TD>
+</TR>
+<TR valign="top">
+<TD width=10% BGCOLOR=#FBF5EF>
+SDIO0 freq (MHz)
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+200
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+RPLL
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+199.998
+</TD>
+</TR>
+<TR valign="top">
+<TD width=10% BGCOLOR=#FBF5EF>
 SDIO1 freq (MHz)
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
@@ -2279,6 +2307,34 @@ RPLL
 <TR valign="top">
 <TD width=10% BGCOLOR=#FBF5EF>
 UART0 freq (MHz)
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+100
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+IOPLL
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+99.999
+</TD>
+</TR>
+<TR valign="top">
+<TD width=10% BGCOLOR=#FBF5EF>
+UART1 freq (MHz)
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+100
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+IOPLL
+</TD>
+<TD width=10% BGCOLOR=#FBF5EF>
+99.999
+</TD>
+</TR>
+<TR valign="top">
+<TD width=10% BGCOLOR=#FBF5EF>
+I2C1 freq (MHz)
 </TD>
 <TD width=10% BGCOLOR=#FBF5EF>
 100

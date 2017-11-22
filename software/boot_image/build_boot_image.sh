@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function cp_bootimg() {
-	cp -v ../fsbl/build/executable.elf ultrazed_fsbl.elf
-	cp -v ../pmu/build/executable.elf ultrazed_pmu.elf
+	cp -v ../petalinux_build/images/linux/zynqmp_fsbl.elf .
+	cp -v ../petalinux_build/images/linux/pmufw.elf .
 	cp -v ../petalinux_build/images/linux/bl31.elf .
 	cp -v ../petalinux_build/images/linux/u-boot.elf .
 }

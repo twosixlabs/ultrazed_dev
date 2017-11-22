@@ -6,11 +6,19 @@ function cp_rootfs()
 	sudo unsquashfs -f -d ${ROOTFS_INSTALL_DIR} ../software/ubuntu-server-16042-arm64.squashfs
 }
 
-# Copy peek/poke and test python library
+# Copy peek/poke application and scripts
 function cp_apps()
 {
-	sudo cp -v ../software/axi_hpm0_rw/axi_hpm0_rw ${ROOTFS_INSTALL_DIR}/usr/local/bin/.
-	sudo cp -v ultrazed.py ${ROOTFS_INSTALL_DIR}/home/zynqmp/.
+	sudo cp -v ../software/axi_hpm0_rw/axi_hpm0_rw ${ROOTFS_INSTALL_DIR}${USER_DIR}/.
+	sudo cp -v config_fpga.sh ${ROOTFS_INSTALL_DIR}${USER_DIR}/.
+	sudo cp -v ultrazed.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
+	sudo cp -v fpga_mmap.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
+}
+
+# Copy FPGA image
+function cp_fpgaimg()
+{
+	sudo cp -v ../software/fpga_image/$FPGA_IMG.bin ${ROOTFS_INSTALL_DIR}/lib/firmware/.
 }
 
 # Write /etc/network/interfaces
@@ -27,6 +35,7 @@ auto eth0
 # iface eth0 inet dhcp
 iface eth0 inet static
    address ${BOARD_IP_ADDR}
+   hwaddress ether ${BOARD_MAC_ADDR}
    netmask 255.255.0.0
    gateway 172.20.0.90
    dns-nameserver 172.20.0.90' > ${ROOTFS_INSTALL_DIR}/etc/network/interfaces"
@@ -42,8 +51,8 @@ function wr_hostname()
 # Write /etc/fstab
 function wr_fstab()
 {
-	sudo sh -c "echo '/dev/mmcblk0p2  /  auto errors=remount-ro  0  1
-/dev/mmcblk0p1  /boot auto defaults  0  2' > ${ROOTFS_INSTALL_DIR}/etc/fstab"
+	sudo sh -c "echo '${SD_DEVICE}p2  /  auto errors=remount-ro  0  1
+${SD_DEVICE}p1  /boot auto defaults  0  2' > ${ROOTFS_INSTALL_DIR}/etc/fstab"
 }
 
 # Add sources to APT repo list
@@ -60,10 +69,14 @@ deb http://ports.ubuntu.com/ubuntu-ports/ xenial-updates multiverse' > $ROOTFS_I
 }
 
 # Define variables
-BOARD_HOSTNAME=ultrazed
-BOARD_IP_ADDR=172.20.2.30
+BOARD_NUM=3
+BOARD_HOSTNAME=ultrazed${BOARD_NUM}
+BOARD_MAC_ADDR=00:0A:35:00:00:0${BOARD_NUM}
+BOARD_IP_ADDR=172.20.2.42
 ROOTFS_INSTALL_DIR=./rootfs_part
-INSTALL_MOD_PATH=/tmp/xilinx_socfpga_kernel/deploy/modules
+USER_DIR=/home/zynqmp
+FPGA_IMG=ultrazed_top
+SD_DEVICE=/dev/mmcblk1
 
 # Install and configure rootFS
 sudo rm -fr ${ROOTFS_INSTALL_DIR}
@@ -71,6 +84,7 @@ mkdir ${ROOTFS_INSTALL_DIR}
 cp_rootfs
 # cp_modules
 cp_apps
+cp_fpgaimg
 wr_ethinterface
 wr_hostname
 wr_fstab

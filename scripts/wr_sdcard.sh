@@ -70,7 +70,6 @@ ROOTFS_INSTALL_DIR=./rootfs_part
 options=()
 options+=(-h:HELP)
 options+=(--help:HELP)
-options+=(-p:SD_PART)
 options+=(--part:SD_PART)
 options+=(--dev=:SD_DEV)
 
