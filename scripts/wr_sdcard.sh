@@ -6,6 +6,7 @@ function print_help()
    echo -e "Syntax: wr_sdcard.sh --dev <SD Card Device>"
    echo -e "-h --help   = Print this menu"
    echo -e "-p --part 	= Partition SD Card"
+   echo -e "--mmc 		= Copy the rootFS/Boot partitions to /root"
    echo -e "--dev 		= SD Card Device"
    exit
 }
@@ -60,11 +61,36 @@ function cp_boot()
 	rm -fr ${BOOT_MOUNT_DIR}
 }
 
+# Copy rootFS and boot partition to the root directory
+# Used to image the eMMC after booting from SD card
+function cp_emmc()
+{
+	echo "-----------------------------"
+	echo "Copying partitions for eMMC"
+	echo "-----------------------------"	
+	mkdir ${ROOTFS_MOUNT_DIR}
+	sudo mount ${SD_DEV}2 ${ROOTFS_MOUNT_DIR}
+	echo "Root file system..."
+	sudo mkdir ${ROOT_DIR}/${ROOTFS_INSTALL_DIR}
+	sudo cp -a ${ROOTFS_INSTALL_DIR} ${ROOT_DIR}/.
+	sync
+	echo "Boot partition..."
+	sudo mkdir ${ROOT_DIR}/${BOOT_INSTALL_DIR}
+	sudo cp -a ${BOOT_INSTALL_DIR} ${ROOT_DIR}/.
+	sync
+	sudo cp wr_mmc.sh ${ROOT_DIR}/.
+	sudo cp parseopt.sh ${ROOT_DIR}/.
+	sync
+	sudo umount ${ROOTFS_MOUNT_DIR}
+	rm -fr ${ROOTFS_MOUNT_DIR}
+}
+
 # Define variables
 BOOT_MOUNT_DIR=./boot_install
 BOOT_INSTALL_DIR=./boot_part
 ROOTFS_MOUNT_DIR=./rootfs_install
 ROOTFS_INSTALL_DIR=./rootfs_part
+ROOT_DIR=${ROOTFS_MOUNT_DIR}/root
 
 # Parse command line options
 options=()
@@ -72,6 +98,7 @@ options+=(-h:HELP)
 options+=(--help:HELP)
 options+=(--part:SD_PART)
 options+=(--dev=:SD_DEV)
+options+=(--mmc:MMC_COPY)
 
 . parseopt.sh
 
@@ -115,6 +142,12 @@ fi
 format_sdcard
 cp_rootfs
 cp_boot
+
+# Copy the rootFS and boot partitions to the /root directory for flashing to eMMC 
+if [ "$MMC_COPY" == 1 ] 
+then
+   cp_emmc
+fi
 
 echo "-----------------------------"
 echo "SD Card Write Complete"

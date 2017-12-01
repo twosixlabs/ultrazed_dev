@@ -36,8 +36,7 @@ function format_mmc()
 function wr_fstab()
 {
 	sudo sh -c "echo '${SD_DEV}2  /  auto errors=remount-ro  0  1
-${SD_DEV}1  /boot auto defaults  0  2
-${NFS_SERVER} ${NFS_MNT_DIR} nfs rsize=8192,wsize=8192,timeo=14,intr,rw,tcp,user' > ${ROOTFS_MOUNT_DIR}/etc/fstab"
+${SD_DEV}1  /boot auto defaults  0  2' > ${ROOTFS_MOUNT_DIR}/etc/fstab"
 }
 
 # Copy rootFS
@@ -75,8 +74,6 @@ BOOT_MOUNT_DIR=./boot_install
 BOOT_INSTALL_DIR=./boot_part
 ROOTFS_MOUNT_DIR=./rootfs_install
 ROOTFS_INSTALL_DIR=./rootfs_part
-NFS_SERVER=172.20.0.170:/mnt/INFRASTOR1/BOSTITCH
-NFS_MNT_DIR=/mnt/bostitch
 
 # Parse command line options
 options=()

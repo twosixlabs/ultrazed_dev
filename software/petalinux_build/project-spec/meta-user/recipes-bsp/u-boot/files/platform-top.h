@@ -8,7 +8,7 @@
 	SERIAL_MULTI \ 
 	CONSOLE_ARG \ 
 	PSSERIAL0 \ 
-	"sd_dev=1\0" \
+	"sd_dev=0\0" \
 	"sd_part=1\0" \
 	"fpga_dev=0\0" \
 	"root_dev=/dev/mmcblk0p2\0" \

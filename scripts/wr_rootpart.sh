@@ -3,16 +3,15 @@
 # Copy rootfs
 function cp_rootfs()
 {
-	sudo unsquashfs -f -d ${ROOTFS_INSTALL_DIR} ../software/ubuntu-server-16042-arm64.squashfs
+	sudo unsquashfs -f -d ${ROOTFS_INSTALL_DIR} ../software/ubuntu-server-16043-arm64.squashfs
 }
 
 # Copy peek/poke application and scripts
 function cp_apps()
 {
 	sudo cp -v ../software/axi_hpm0_rw/axi_hpm0_rw ${ROOTFS_INSTALL_DIR}${USER_DIR}/.
-	sudo cp -v config_fpga.sh ${ROOTFS_INSTALL_DIR}${USER_DIR}/.
 	sudo cp -v ultrazed.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
-	sudo cp -v fpga_mmap.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
+	sudo cp -v mmio.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
 }
 
 # Copy FPGA image
