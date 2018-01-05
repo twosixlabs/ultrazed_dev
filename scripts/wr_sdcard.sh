@@ -71,11 +71,9 @@ function cp_emmc()
 	mkdir ${ROOTFS_MOUNT_DIR}
 	sudo mount ${SD_DEV}2 ${ROOTFS_MOUNT_DIR}
 	echo "Root file system..."
-	sudo mkdir ${ROOT_DIR}/${ROOTFS_INSTALL_DIR}
 	sudo cp -a ${ROOTFS_INSTALL_DIR} ${ROOT_DIR}/.
 	sync
 	echo "Boot partition..."
-	sudo mkdir ${ROOT_DIR}/${BOOT_INSTALL_DIR}
 	sudo cp -a ${BOOT_INSTALL_DIR} ${ROOT_DIR}/.
 	sync
 	sudo cp wr_mmc.sh ${ROOT_DIR}/.
@@ -87,9 +85,9 @@ function cp_emmc()
 
 # Define variables
 BOOT_MOUNT_DIR=./boot_install
-BOOT_INSTALL_DIR=./boot_part
+BOOT_INSTALL_DIR=../software/boot_part
 ROOTFS_MOUNT_DIR=./rootfs_install
-ROOTFS_INSTALL_DIR=./rootfs_part
+ROOTFS_INSTALL_DIR=../software/rootfs_part
 ROOT_DIR=${ROOTFS_MOUNT_DIR}/root
 
 # Parse command line options

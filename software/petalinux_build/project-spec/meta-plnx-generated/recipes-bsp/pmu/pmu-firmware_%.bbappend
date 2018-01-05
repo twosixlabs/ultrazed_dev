@@ -1,6 +1,7 @@
 
 XSCTH_WS = "${TOPDIR}/../components/plnx_workspace/pmufw"
 EXTERNALXSCTSRC = "${PETALINUX}/tools/hsm/data/embeddedsw"
+EXTERNALXSCTSRCHASH = "build"
 inherit externalxsctsrc
 EXTERNALXSCTSRC_BUILD = "${TOPDIR}/../components/plnx_workspace/pmufw"
 export _JAVA_OPTIONS

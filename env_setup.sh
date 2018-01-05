@@ -1,23 +1,26 @@
 #!/bin/bash
 
-HERE=$(pwd)
-FPGA_PROJ=ultrazed_base
-
-VIVADO_INSTALL_PATH=~/bin/xilinx/Vivado/2017.3
-PETALINUX_INSTALL_PATH=~/bin/petalinux_20173
-
-# Setup environment variables
-export CROSS_COMPILE=aarch64-linux-gnu-
-export ARCH=arm64
-export SWT_GTK3=0
-export PATH=$HERE/software/dtc:$PATH
+# Xilinx install paths
+VIVADO_INSTALL_PATH=~/bin/xilinx/Vivado/2017.4
+PETALINUX_INSTALL_PATH=~/bin/petalinux_20174
 
 # Setup SW environment
 source $PETALINUX_INSTALL_PATH/settings.sh
-source software/petalinux.sh
-source software/boot_image/build_boot_image.sh
-source software/fpga_image/build_fpga_image.sh
+export CROSS_COMPILE=aarch64-linux-gnu-
+export ARCH=arm64
+export SWT_GTK3=0
+export PETA_PROJ=petalinux_build
 
 # Setup HW environment
-source fpga/$FPGA_PROJ/build_fpga.sh
 source $VIVADO_INSTALL_PATH/settings64.sh
+export FPGA_PROJ=ultrazed_base
+export FPGA_IMG=${FPGA_PROJ}.bit
+export FPGA_BIN=${FPGA_PROJ}.bin
+
+# Install dependencies for Ubuntu 16.04.3
+function install_pkgs() {
+	sudo apt-get update
+	sudo apt-get install tofrodos iproute2 gawk xvfb gcc git make net-tools libncurses5-dev tftpd zlib1g-dev:i386 libssl-dev flex bison libselinux1 \
+	gnupg wget diffstat chrpath socat xterm autoconf libtool tar unzip zlib1g-dev gcc-multilib build-essential libsdl1.2-dev libglib2.0-dev screen pax gzip \
+	bc device-tree-compiler lzma lzop texinfo
+}

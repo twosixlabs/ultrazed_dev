@@ -19,7 +19,7 @@
 	"kernel_addr=0x10000000\0" \
 	"loadbootenv=fatload mmc $sd_dev:$sd_part ${boot_env_addr} ${boot_env}\0" \ 
 	"importbootenv=env import -t ${boot_env_addr} $filesize\0" \ 
-	"fpga_img=ultrazed_top.bit\0" \
+	"fpga_img=ultrazed_base.bit\0" \
 	"dtb_img=system.dtb\0" \
 	"kernel_img=Image\0" \
 	"setup_mmc=mmc dev $sd_dev:$sd_part\0" \

@@ -9,15 +9,14 @@ function cp_rootfs()
 # Copy peek/poke application and scripts
 function cp_apps()
 {
-	sudo cp -v ../software/axi_hpm0_rw/axi_hpm0_rw ${ROOTFS_INSTALL_DIR}${USER_DIR}/.
-	sudo cp -v ultrazed.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
-	sudo cp -v mmio.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
+	sudo cp -v ./ultrazed.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
+	sudo cp -v ./mmio.py ${ROOTFS_INSTALL_DIR}/${USER_DIR}/.
 }
 
 # Copy FPGA image
 function cp_fpgaimg()
 {
-	sudo cp -v ../software/fpga_image/$FPGA_IMG.bin ${ROOTFS_INSTALL_DIR}/lib/firmware/.
+	sudo cp -v ../fpga/${FPGA_PROJ}/*.bin ${ROOTFS_INSTALL_DIR}/lib/firmware/${FPGA_BIN}
 }
 
 # Write /etc/network/interfaces
@@ -31,13 +30,13 @@ auto lo
 iface lo inet loopback
   
 auto eth0
-# iface eth0 inet dhcp
-iface eth0 inet static
-   address ${BOARD_IP_ADDR}
-   hwaddress ether ${BOARD_MAC_ADDR}
-   netmask 255.255.0.0
-   gateway 172.20.0.90
-   dns-nameserver 172.20.0.90' > ${ROOTFS_INSTALL_DIR}/etc/network/interfaces"
+iface eth0 inet dhcp
+# iface eth0 inet static
+#    address ${BOARD_IP_ADDR}
+#    hwaddress ether ${BOARD_MAC_ADDR}
+#    netmask 255.255.0.0
+#    gateway 172.20.0.90
+#    dns-nameserver 172.20.0.90' > ${ROOTFS_INSTALL_DIR}/etc/network/interfaces"
 }
 
 # Write /etc/hosts, /etc/hostname
@@ -68,20 +67,18 @@ deb http://ports.ubuntu.com/ubuntu-ports/ xenial-updates multiverse' > $ROOTFS_I
 }
 
 # Define variables
-BOARD_NUM=3
+BOARD_NUM=1
 BOARD_HOSTNAME=ultrazed${BOARD_NUM}
 BOARD_MAC_ADDR=00:0A:35:00:00:0${BOARD_NUM}
 BOARD_IP_ADDR=172.20.2.42
 ROOTFS_INSTALL_DIR=./rootfs_part
 USER_DIR=/home/zynqmp
-FPGA_IMG=ultrazed_top
 SD_DEVICE=/dev/mmcblk1
 
 # Install and configure rootFS
 sudo rm -fr ${ROOTFS_INSTALL_DIR}
 mkdir ${ROOTFS_INSTALL_DIR}
 cp_rootfs
-# cp_modules
 cp_apps
 cp_fpgaimg
 wr_ethinterface

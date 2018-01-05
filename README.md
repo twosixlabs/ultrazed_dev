@@ -1,16 +1,19 @@
 Ultrazed Zynq SoCFPGA Development
 
 Tools Required:
-Xilinx Vivado/SDK 2017.3.1
-Xilinx Petalinx 2017.3
+Xilinx Vivado/SDK 2017.4
+Xilinx Petalinx 2017.4
 
 More Info / Instructions:
 https://www.twosixlabs.com/ubuntu-on-ultrazed-embedded-high-performance-computing/
 
 Quick and dirty build instructions:
 1. Edit env_setup.sh to point to your Vivado and Petalinux installations
-2. cd scripts
-3. ./build_all.sh
+2. source env_setup.sh
+3. make all && make install
+
+Create tarball of SD card partitions:
+1. Run the SD write script in the scripts directory: './wr_tarball.sh --tar FILENAME
 
 Image your SD card for SD boot:
 1. Insert the SD card and unmount it
@@ -37,4 +40,4 @@ First time boot instructions - eMMC:
 6. Login as zynqmp, then switch to root with su.
 7. Switch to /root and image the eMMC with the wrtie eMMC script: './wr_mmc.sh --dev /dev/mmcblk0'
 8. Power off and configure your Ultrazed SOM to boot from eMMC
-9. Power on.  The system should now boot form the eMMC
+9. Power on.  The system should now boot from the eMMC
