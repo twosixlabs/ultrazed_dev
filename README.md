@@ -3,6 +3,7 @@ Ultrazed Zynq SoCFPGA Development
 Tools Required:
 Xilinx Vivado/SDK 2017.4
 Xilinx Petalinx 2017.4
+Git LFS - https://help.github.com/articles/installing-git-large-file-storage/
 
 More Info / Instructions:
 https://www.twosixlabs.com/ubuntu-on-ultrazed-embedded-high-performance-computing/
