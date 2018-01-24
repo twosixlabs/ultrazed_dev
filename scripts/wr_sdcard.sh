@@ -3,11 +3,11 @@
 # Print help menu
 function print_help()
 {
-   echo -e "Syntax: wr_sdcard.sh --dev <SD Card Device>"
-   echo -e "-h --help   = Print this menu"
-   echo -e "-p --part 	= Partition SD Card"
-   echo -e "--mmc 		= Copy the rootFS/Boot partitions to /root"
-   echo -e "--dev 		= SD Card Device"
+   echo -e "Syntax:  wr_sdcard.sh --dev <SD Card Device>"
+   echo -e "--help   = Print this menu"
+   echo -e "--part   = Partition SD Card"
+   echo -e "--mmc    = Copy the rootFS/Boot partitions to /root"
+   echo -e "--dev    = SD Card Device"
    exit
 }
 
@@ -76,8 +76,8 @@ function cp_emmc()
 	echo "Boot partition..."
 	sudo cp -a ${BOOT_INSTALL_DIR} ${ROOT_DIR}/.
 	sync
-	sudo cp wr_mmc.sh ${ROOT_DIR}/.
-	sudo cp parseopt.sh ${ROOT_DIR}/.
+	sudo cp ./scripts/wr_mmc.sh ${ROOT_DIR}/.
+	sudo cp ./scripts/parseopt.sh ${ROOT_DIR}/.
 	sync
 	sudo umount ${ROOTFS_MOUNT_DIR}
 	rm -fr ${ROOTFS_MOUNT_DIR}
@@ -85,20 +85,18 @@ function cp_emmc()
 
 # Define variables
 BOOT_MOUNT_DIR=./boot_install
-BOOT_INSTALL_DIR=../software/boot_part
+BOOT_INSTALL_DIR=./software/boot_part
 ROOTFS_MOUNT_DIR=./rootfs_install
-ROOTFS_INSTALL_DIR=../software/rootfs_part
+ROOTFS_INSTALL_DIR=./software/rootfs_part
 ROOT_DIR=${ROOTFS_MOUNT_DIR}/root
 
 # Parse command line options
 options=()
-options+=(-h:HELP)
 options+=(--help:HELP)
 options+=(--part:SD_PART)
 options+=(--dev=:SD_DEV)
 options+=(--mmc:MMC_COPY)
-
-. parseopt.sh
+source ./scripts/parseopt.sh
 
 if [ "$HELP" == 1 ] 
 then

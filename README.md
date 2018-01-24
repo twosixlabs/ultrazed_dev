@@ -7,10 +7,12 @@ Xilinx Petalinx 2017.4
 More Info / Instructions:
 https://www.twosixlabs.com/ubuntu-on-ultrazed-embedded-high-performance-computing/
 
-Quick and dirty build instructions:
-1. Edit env_setup.sh to point to your Vivado and Petalinux installations
-2. source env_setup.sh
-3. make all && make install
+Configure Vivado / Petalinux install directories, install Ubuntu 16.04.3 build dependencies and copy Vivado board files:
+1. source ./scripts/eng_setup.sh --vivado INSTALL_DIR --petalinux INSTALL_DIR --install
+
+Build all:
+1. source ./scripts/env_setup.sh
+2. make all && make install
 
 Create tarball of SD card partitions:
 1. Run the SD write script in the scripts directory: './wr_tarball.sh --tar FILENAME
