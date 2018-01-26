@@ -7,7 +7,7 @@ function cp_rootfs()
 }
 
 # Copy FPGA image
-function cp_fpgaimg()
+function cp_fpga_image()
 {
 	sudo cp -v ../fpga/${FPGA_PROJ}/*.bin ${ROOTFS_INSTALL_DIR}/lib/firmware/${FPGA_BIN}
 }
@@ -72,7 +72,7 @@ echo "-----------------------------------------"
 sudo rm -fr ${ROOTFS_INSTALL_DIR}
 mkdir ${ROOTFS_INSTALL_DIR}
 cp_rootfs
-cp_fpgaimg
+cp_fpga_image
 wr_ethinterface
 wr_hostname
 wr_fstab
