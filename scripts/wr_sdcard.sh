@@ -98,12 +98,13 @@ options+=(--dev=:SD_DEV)
 options+=(--mmc:MMC_COPY)
 source ./scripts/parseopt.sh
 
+# Help
 if [ "$HELP" == 1 ] 
 then
 	print_help
 	exit
 fi
-
+# Need to specify a device
 if [ "$SD_DEV" == "" ] 
 then
 	echo -e "ERROR:  Need to specify SD Card device"
@@ -111,7 +112,6 @@ then
    	lsblk
    	exit
 fi
-
 # Check to see if SD_DEV is mounted
 if mount | grep $SD_DEV > /dev/null
 then
@@ -125,7 +125,6 @@ if [ "$SD_PART" == 1 ]
 then
    partition_sdcard
 fi
-
 # Check to see if SD_DEV is an SD card reader 
 # Append "p" to "/dev/mmcblkX" --> "/dev/mmcblkXpN"
 # USB SD card readers mount as "/dev/sdX" --> "/dev/sdXN"
@@ -133,12 +132,10 @@ if echo $SD_DEV | grep mmcblk > /dev/null
 then
 	SD_DEV="${SD_DEV}p"
 fi
-
 # Write a new SD card
 format_sdcard
 cp_rootfs
 cp_boot
-
 # Copy the rootFS and boot partitions to the /root directory for flashing to eMMC 
 if [ "$MMC_COPY" == 1 ] 
 then
