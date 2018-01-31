@@ -5,8 +5,9 @@ fpga/*/*.hw
 fpga/*/*.ioplanning
 software/device_tree/system.dt*
 software/petalinux_build/components/*
+software/petalinux_build/project-spec/meta-plnx-generated/*
 software/axi_hpm0_rw/axi_hpm0_rw
 software/axi_hpm0_rw/main.o
 software/boot_part/*
 software/rootfs_part/*
-scripts/*.tar.gz
+*.tar.gz

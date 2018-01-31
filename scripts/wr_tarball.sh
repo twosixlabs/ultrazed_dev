@@ -43,7 +43,9 @@ function cp_scripts()
 	echo "-----------------------------"
 	echo "Copying install scripts"
 	echo "-----------------------------"	
-	cp -v wr_sdcard.sh wr_mmc.sh parseopt.sh ${TAR_DIR}/scripts/.
+	cp -v ./scripts/wr_sdcard.sh ${TAR_DIR}/scripts/.
+	cp -v ./scripts/wr_mmc.sh ${TAR_DIR}/scripts/.
+	cp -v ./scripts/parseopt.sh ${TAR_DIR}/scripts/.
 	sync
 }
 
@@ -58,8 +60,8 @@ function wr_tarball()
 }
 
 # Define variables
-BOOT_INSTALL_DIR=../software/boot_part
-ROOTFS_INSTALL_DIR=../software/rootfs_part
+BOOT_INSTALL_DIR=./software/boot_part
+ROOTFS_INSTALL_DIR=./software/rootfs_part
 TAR_DIR=./sd_image
 
 # Parse command line options
@@ -67,8 +69,7 @@ options=()
 options+=(-h:HELP)
 options+=(--help:HELP)
 options+=(--tar=:TAR)
-
-. parseopt.sh
+source ./scripts/parseopt.sh
 
 if [ "$HELP" == 1 ] 
 then
