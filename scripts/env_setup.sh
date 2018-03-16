@@ -85,6 +85,7 @@ else
 	export ARCH=arm64
 	export SWT_GTK3=0
 	export PETA_PROJ=petalinux_build
+	export PETA_TEMP=${PWD}/software/${PETA_PROJ}/build/tmp
 	export FPGA_PROJ=ultrazed_base
 	export FPGA_IMG=${FPGA_PROJ}.bit
 	export FPGA_BIN=${FPGA_PROJ}.bin

@@ -222,7 +222,7 @@ CONFIG_SUBSYSTEM_FW_VERSION="2017.3.1"
 #
 # TMPDIR Location
 #
-CONFIG_TMP_DIR_LOCATION="/home/thoyt/fpga_work/ultrazed_dev/software/petalinux_build/build/tmp"
+CONFIG_TMP_DIR_LOCATION="${PETA_TEMP}"
 
 #
 # Parallel thread execution
